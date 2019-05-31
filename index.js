@@ -236,6 +236,20 @@ function addCard(but) {
 		card.innerHTML = cardText;
 		but.parentNode.remove();
 		document.getElementById('hiddenButton' + count).style.display = 'block';
+		card.addEventListener('mousedown', function(event) {
+			//Если уже есть одна перетаскиваемая карточка, то ничего не делаем
+			if (dragCard) return;
+			var card;
+			if (event.target.classList.contains('column__card')) {
+				card = event.target;
+			}
+			if (event.target.parentNode.classList.contains('column__card')) {
+				card = event.target.parentNode;
+			}
+
+			dragCard = card;
+			card.style.opacity = 0.5;
+		});
 	}
 	else {
 		card.style.borderTop = '1px solid #a00';
